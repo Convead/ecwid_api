@@ -9,6 +9,7 @@ require_relative "ecwid_api/error"
 # the default client.
 #
 module EcwidApi
+  require_relative 'ecwid_api/faraday_middleware'
   require_relative "ecwid_api/o_auth"
   require_relative "ecwid_api/client"
   require_relative "ecwid_api/error"
