@@ -61,5 +61,4 @@ module EcwidApi
   end
 end
 
-# deprecated alias
-Faraday::Request::NewOAuth2 = EcwidApi::FaradayMiddleware::OAuth2
+Faraday::Request.register_middleware ecwid_oauth2: EcwidApi::FaradayMiddleware::OAuth2
