@@ -73,7 +73,12 @@ module EcwidApi
       if response.success?
         OpenStruct.new(response.body)
       else
-        Rails.logger.error("[Ecwid::API][access_token] #{response.body.to_s}")
+        Airbrake.notify(
+          "[Integration][EcwidApi::OAuth][access_token]: #{response.body.to_s}.",
+          {
+            error_message: response.body.to_s
+          }
+        )
         raise Error.new(response.body["error_description"] || response.body.to_s)
       end
     end
