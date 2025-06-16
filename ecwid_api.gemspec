@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "faraday", "~> 0.9.0"
   spec.add_dependency "faraday_middleware", "~> 0.10.0"
+  spec.add_dependency "airbrake"
 end
