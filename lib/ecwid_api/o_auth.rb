@@ -73,7 +73,7 @@ module EcwidApi
       if response.success?
         OpenStruct.new(response.body)
       else
-        raise Error.new(response.body["error_description"])
+        raise Error.new(response.body["error_description"] || response.body.to_s)
       end
     end
 
