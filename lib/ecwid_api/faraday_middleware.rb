@@ -31,11 +31,15 @@ module EcwidApi
       def_delegators :'Faraday::Utils', :parse_query, :build_query
 
       def call(env)
-        params = { param_name => @token }.update query_params(env[:url])
-        token = params[param_name]
+        token = @token
 
         if token.respond_to?(:empty?) && !token.empty?
-          env[:url].query = build_query params
+          # Удаляем токен из query string, если он там уже есть
+          params = query_params(env[:url])
+          params.delete(param_name)
+          env[:url].query = build_query(params)
+
+          # Добавляем токен только в заголовок Authorization
           env[:request_headers][AUTH_HEADER] ||= "Bearer #{token}"
         end
 
